@@ -399,13 +399,6 @@ module IPAddress;
       @compressed
     end
 
-    #
-    # Returns true if the address is a link local address
-    #
-    def link_local?
-      @groups[0] == 0xfe80
-    end
-
     # 
     # Returns true if the address is an unspecified address
     # 
@@ -435,7 +428,7 @@ module IPAddress;
     #     #=> true
     #
     def link_local?
-      [self.class.new("fe80::/64")].any? {|i| i.include? self}
+      [self.class.new("fe80::/10")].any? {|i| i.include? self}
     end
 
     #
