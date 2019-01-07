@@ -47,6 +47,14 @@ class IPv6Test < Minitest::Test
       "fe80::",
       "fe80::1",
       "fe80::208:74ff:feda:625c",
+      "fe80:0000:0000:0000:0000:0000:0000:0000",
+      "febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+      "fe80::/10",
+      "fe80::/11",
+      "fe80::/20",
+      "fe80::/30",
+      "fe80::/30",
+      "fe80::/63",
       "fe80::/64",
       "fe80::/65"]
     
@@ -54,8 +62,7 @@ class IPv6Test < Minitest::Test
       "::",
       "::1",
       "ff80:03:02:01::",
-      "2001:db8::8:800:200c:417a",
-      "fe80::/63"]
+      "2001:db8::8:800:200c:417a"]
 
     @unique_local = [
       "fc00::/7",
@@ -230,12 +237,6 @@ class IPv6Test < Minitest::Test
     assert_equal "1::1", @klass.new("1:0:0:0:0:0:0:1").compressed
   end
   
-  def test_method_link_local?
-    assert_equal true, @klass.new("fe80::1").link_local?
-    assert_equal true, @klass.new("fe80:ffff::1").link_local?
-    assert_equal false, @klass.new("fe81::1").link_local?
-  end
-
   def test_method_unspecified?
     assert_equal true, @klass.new("::").unspecified?
     assert_equal false, @ip.unspecified?    
@@ -248,10 +249,10 @@ class IPv6Test < Minitest::Test
 
   def test_method_link_local?
     @link_local.each do |addr|
-      assert_equal true, @klass.new(addr).link_local?
+      assert_equal true, @klass.new(addr).link_local?, addr
     end
     @not_link_local.each do |addr|
-      assert_equal false, @klass.new(addr).link_local?
+      assert_equal false, @klass.new(addr).link_local?, addr
     end
   end
 
