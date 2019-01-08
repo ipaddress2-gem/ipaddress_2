@@ -19,7 +19,7 @@ require 'ipaddress/mongoid' if defined?(Mongoid)
 module IPAddress
 
   NAME            = "IPAddress"
-  GEM             = "ipaddress"
+  GEM             = "ipaddress2"
   AUTHORS         = ["Marco Ceresa <ceresa@ieee.org>"]
 
   #
