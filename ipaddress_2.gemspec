@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.files = `git ls-files -z`.split("\x0")
   s.homepage = "https://github.com/ipaddress2-gem/ipaddress2"
 
-  s.add_development_dependency "bundler", "~> 1.5"
+  s.add_development_dependency "bundler"
   s.add_development_dependency "rake"
   s.add_development_dependency "minitest", '~> 5.8', '>= 5.8.4'
   s.add_development_dependency "pry", ">= 0.10.1"
