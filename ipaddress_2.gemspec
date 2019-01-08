@@ -5,7 +5,7 @@ require 'ipaddress/version'
 Gem::Specification.new do |s|
   s.licenses = ["MIT"]
   s.summary = "IPv4/IPv6 address manipulation library"
-  s.name = "ipaddress2"
+  s.name = "ipaddress_2"
   s.version = "0.9.0"
   s.version = IPAddress::VERSION
   s.require_paths = ["lib"]
