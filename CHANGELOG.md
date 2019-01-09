@@ -3,6 +3,9 @@
 ### Enhancements
 * Added split to IPv6
 
+### Bugfix
+* Added to_json
+
 ## 0.9.0
 
 ### Enhancements
