@@ -40,6 +40,7 @@ class IPv6Test < Minitest::Test
 
     @ip = @klass.new "2001:db8::8:800:200c:417a/64"
     @network = @klass.new "2001:db8:8:800::/64"
+    @network2 = @klass.new "2001:db8:8::/48"
     @arr = [8193,3512,0,0,8,2048,8204,16762]
     @hex = "20010db80000000000080800200c417a"
 
@@ -231,29 +232,29 @@ class IPv6Test < Minitest::Test
     
     assert_equal @ip.network, @ip.split(1).first
     
-    arr =  ["2001:db8:8:800::/67", "2001:db8:8:800:2000::/67", "2001:db8:8:800:4000::/67",
-      "2001:db8:8:800:6000::/67", "2001:db8:8:800:8000::/67", "2001:db8:8:800:a000::/67",
-      "2001:db8:8:800:c000::/67", "2001:db8:8:800:e000::/67"]
-    assert_equal arr, @network.split(8).map {|s| s.to_string}
-    arr = ["2001:db8:8:800::/67", "2001:db8:8:800:2000::/67", "2001:db8:8:800:4000::/67",
-      "2001:db8:8:800:6000::/67", "2001:db8:8:800:8000::/67", "2001:db8:8:800:a000::/67",
-      "2001:db8:8:800:c000::/66"]
-    assert_equal arr, @network.split(7).map {|s| s.to_string}
-    arr = ["2001:db8:8:800::/67", "2001:db8:8:800:2000::/67", "2001:db8:8:800:4000::/67", 
-           "2001:db8:8:800:6000::/67", "2001:db8:8:800:8000::/66", "2001:db8:8:800:c000::/66"]
-    assert_equal arr, @network.split(6).map {|s| s.to_string}
-    arr = ["2001:db8:8:800::/67", "2001:db8:8:800:2000::/67", "2001:db8:8:800:4000::/67", 
-           "2001:db8:8:800:6000::/67", "2001:db8:8:800:8000::/65"]
-    assert_equal arr, @network.split(5).map {|s| s.to_string}
-    arr = ["2001:db8:8:800::/66", "2001:db8:8:800:4000::/66", "2001:db8:8:800:8000::/66", 
-           "2001:db8:8:800:c000::/66"]
-    assert_equal arr, @network.split(4).map {|s| s.to_string}
-    arr = ["2001:db8:8:800::/66", "2001:db8:8:800:4000::/66", "2001:db8:8:800:8000::/65"]
-    assert_equal arr, @network.split(3).map {|s| s.to_string}
-    arr = ["2001:db8:8:800::/65", "2001:db8:8:800:8000::/65"]
-    assert_equal arr, @network.split(2).map {|s| s.to_string}
-    arr = ["2001:db8:8:800::/64"]
-    assert_equal arr, @network.split(1).map {|s| s.to_string}
+    arr =  ["2001:db8:8::/51", "2001:db8:8:2000::/51", "2001:db8:8:4000::/51", 
+            "2001:db8:8:6000::/51", "2001:db8:8:8000::/51", "2001:db8:8:a000::/51",
+            "2001:db8:8:c000::/51", "2001:db8:8:e000::/51"]
+    assert_equal arr, @network2.split(8).map {|s| s.to_string}
+    arr = ["2001:db8:8::/51", "2001:db8:8:2000::/51", "2001:db8:8:4000::/51",
+           "2001:db8:8:6000::/51", "2001:db8:8:8000::/51", "2001:db8:8:a000::/51",
+           "2001:db8:8:c000::/50"]
+    assert_equal arr, @network2.split(7).map {|s| s.to_string}
+    arr = ["2001:db8:8::/51", "2001:db8:8:2000::/51", "2001:db8:8:4000::/51",
+           "2001:db8:8:6000::/51", "2001:db8:8:8000::/50", "2001:db8:8:c000::/50"]
+    assert_equal arr, @network2.split(6).map {|s| s.to_string}
+    arr = ["2001:db8:8::/51", "2001:db8:8:2000::/51", "2001:db8:8:4000::/51",
+           "2001:db8:8:6000::/51", "2001:db8:8:8000::/49"]
+    assert_equal arr, @network2.split(5).map {|s| s.to_string}
+    arr =  ["2001:db8:8::/50", "2001:db8:8:4000::/50", "2001:db8:8:8000::/50",
+            "2001:db8:8:c000::/50"]
+    assert_equal arr, @network2.split(4).map {|s| s.to_string}
+    arr = ["2001:db8:8::/50", "2001:db8:8:4000::/50", "2001:db8:8:8000::/49"]
+    assert_equal arr, @network2.split(3).map {|s| s.to_string}
+    arr = ["2001:db8:8::/49", "2001:db8:8:8000::/49"]
+    assert_equal arr, @network2.split(2).map {|s| s.to_string}
+    arr = ["2001:db8:8::/48"]
+    assert_equal arr, @network2.split(1).map {|s| s.to_string}
   end
 
   def test_method_literal
