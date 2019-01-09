@@ -328,6 +328,51 @@ module IPAddress;
     alias_method :arpa, :reverse
 
     #
+    # Splits a network into different subnets
+    #
+    # If the IP Address is a network, it can be divided into
+    # multiple networks. If +self+ is not a network, this
+    # method will calculate the network from the IP and then
+    # subnet it.
+    #
+    # If +subnets+ is an power of two number, the resulting 
+    # networks will be divided evenly from the supernet.
+    #
+    #   network = IPAddress("2001:db8:8:800::/64")
+    #
+    #   network / 4   # implies map{|i| i.to_string}
+    #     #=> ["2001:db8:8:800::/66",
+    #     #=>  "2001:db8:8:800:4000::/66",
+    #     #=>  "2001:db8:8:800:8000::/66",
+    #     #=>  "2001:db8:8:800:c000::/66"]
+    #     
+    # If +num+ is any other number, the supernet will be 
+    # divided into some networks with a even number of hosts and
+    # other networks with the remaining addresses.
+    #
+    #   network = IPAddress("2001:db8:8:800::/64")
+    #
+    #   network / 3   # implies map{|i| i.to_string}
+    #   
+    #     #=> ["2001:db8:8:800::/66",
+    #     #=>  "2001:db8:8:800:4000::/66",
+    #     #=>  "2001:db8:8:800:8000::/65"]
+    #
+    # Returns an array of IPv4 objects
+    #
+    def split(subnets=2)
+      unless (1..(2**@prefix.host_prefix)).include? subnets
+        raise ArgumentError, "Value #{subnets} out of range" 
+      end
+      networks = subnet(newprefix(subnets))
+      until networks.size == subnets
+        networks = sum_first_found(networks)
+      end
+      return networks
+    end
+    alias_method :/, :split
+
+    #
     # Returns the network number in Unsigned 128bits format
     #
     #   ip6 = IPAddress "2001:db8::8:800:200c:417a/64"
@@ -878,6 +923,22 @@ module IPAddress;
     end
 
     private
+
+    def newprefix(num)
+      return @prefix + (Math::log2(num).ceil )
+    end
+
+    def sum_first_found(arr)
+      dup = arr.dup.reverse
+      dup.each_with_index do |obj,i|
+        a = [self.class.summarize(obj,dup[i+1])].flatten
+        if a.size == 1
+          dup[i..i+1] = a
+          return dup.reverse
+        end
+      end
+      return dup.reverse
+    end
 
     def compress_address
       str = @groups.map{|i| i.to_s 16}.join ":"
