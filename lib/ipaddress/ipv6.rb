@@ -119,8 +119,19 @@ module IPAddress;
       @address
     end
 
+    # When serializing to JSON format, just use the string representation
     #
-    # Returns an array with the 16 bits groups in decimal
+    #   ip = IPAddress "2001:db8::8:800:200c:417a/64"
+    #
+    #   ip.as_json
+    #     #=> "2001:db8::8:800:200c:417a/64"
+    #
+    def as_json
+      to_string
+    end
+
+    #
+    # Returns an array with the 16 bits groups in decimal 
     # format:
     #
     #   ip6 = IPAddress "2001:db8::8:800:200c:417a/64"
