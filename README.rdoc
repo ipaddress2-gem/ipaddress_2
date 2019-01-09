@@ -38,21 +38,11 @@ If you want to contribute, please refer to {Contributing.md}[https://github.com/
 
 Install the library using rubygems
 
-  $ gem install ipaddress
+  $ gem install ipaddress_2
 
 You can then use it in your programs:
   
-  require 'rubygems'  # optional
-  require 'ipaddress'
-
-Another way would be to clone the git repository
-
-  $ git clone git://github.com/bluemonk/ipaddress.git
-
-And then install the library
- 
-  $ cd ipaddress
-  ipaddress$ rake install
+  require 'ipaddress_2'
 
 == Documentation
 
