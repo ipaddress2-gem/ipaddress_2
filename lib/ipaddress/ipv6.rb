@@ -330,6 +330,8 @@ module IPAddress;
     #
     # Splits a network into different subnets
     #
+    # NOTE: Will allow you to split past /64 against RFC 5375
+    #
     # If the IP Address is a network, it can be divided into
     # multiple networks. If +self+ is not a network, this
     # method will calculate the network from the IP and then
@@ -338,27 +340,27 @@ module IPAddress;
     # If +subnets+ is an power of two number, the resulting 
     # networks will be divided evenly from the supernet.
     #
-    #   network = IPAddress("2001:db8:8:800::/64")
+    #   network = IPAddress("2001:db8:8::/48")
     #
     #   network / 4   # implies map{|i| i.to_string}
-    #     #=> ["2001:db8:8:800::/66",
-    #     #=>  "2001:db8:8:800:4000::/66",
-    #     #=>  "2001:db8:8:800:8000::/66",
-    #     #=>  "2001:db8:8:800:c000::/66"]
+    #     #=> ["2001:db8:8::/50",
+    #     #=>  "2001:db8:8:4000::/50",
+    #     #=>  "2001:db8:8:8000::/50",
+    #     #=>  "2001:db8:8:c000::/50"]
     #     
     # If +num+ is any other number, the supernet will be 
     # divided into some networks with a even number of hosts and
     # other networks with the remaining addresses.
     #
-    #   network = IPAddress("2001:db8:8:800::/64")
+    #   network = IPAddress("2001:db8:8::/48")
     #
     #   network / 3   # implies map{|i| i.to_string}
     #   
-    #     #=> ["2001:db8:8:800::/66",
-    #     #=>  "2001:db8:8:800:4000::/66",
-    #     #=>  "2001:db8:8:800:8000::/65"]
+    #     #=> ["2001:db8:8::/50",
+    #     #=>  "2001:db8:8:4000::/50",
+    #     #=>  "2001:db8:8:8000::/49"]
     #
-    # Returns an array of IPv4 objects
+    # Returns an array of IPv6 objects
     #
     def split(subnets=2)
       unless (1..(2**@prefix.host_prefix)).include? subnets
