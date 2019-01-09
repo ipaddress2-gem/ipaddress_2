@@ -225,6 +225,37 @@ class IPv6Test < Minitest::Test
     assert_equal ["2001:db8:8:800::/63","2001:db9:8:800::/64"], (ip1+ip2).map{|i| i.to_string}
   end
 
+  def test_method_split
+    assert_raises(ArgumentError) {@ip.split(0)}
+    # assert_raises(ArgumentError) {@ip.split(257)}
+    
+    assert_equal @ip.network, @ip.split(1).first
+    
+    arr =  ["2001:db8:8:800::/67", "2001:db8:8:800:2000::/67", "2001:db8:8:800:4000::/67",
+      "2001:db8:8:800:6000::/67", "2001:db8:8:800:8000::/67", "2001:db8:8:800:a000::/67",
+      "2001:db8:8:800:c000::/67", "2001:db8:8:800:e000::/67"]
+    assert_equal arr, @network.split(8).map {|s| s.to_string}
+    arr = ["2001:db8:8:800::/67", "2001:db8:8:800:2000::/67", "2001:db8:8:800:4000::/67",
+      "2001:db8:8:800:6000::/67", "2001:db8:8:800:8000::/67", "2001:db8:8:800:a000::/67",
+      "2001:db8:8:800:c000::/66"]
+    assert_equal arr, @network.split(7).map {|s| s.to_string}
+    arr = ["2001:db8:8:800::/67", "2001:db8:8:800:2000::/67", "2001:db8:8:800:4000::/67", 
+           "2001:db8:8:800:6000::/67", "2001:db8:8:800:8000::/66", "2001:db8:8:800:c000::/66"]
+    assert_equal arr, @network.split(6).map {|s| s.to_string}
+    arr = ["2001:db8:8:800::/67", "2001:db8:8:800:2000::/67", "2001:db8:8:800:4000::/67", 
+           "2001:db8:8:800:6000::/67", "2001:db8:8:800:8000::/65"]
+    assert_equal arr, @network.split(5).map {|s| s.to_string}
+    arr = ["2001:db8:8:800::/66", "2001:db8:8:800:4000::/66", "2001:db8:8:800:8000::/66", 
+           "2001:db8:8:800:c000::/66"]
+    assert_equal arr, @network.split(4).map {|s| s.to_string}
+    arr = ["2001:db8:8:800::/66", "2001:db8:8:800:4000::/66", "2001:db8:8:800:8000::/65"]
+    assert_equal arr, @network.split(3).map {|s| s.to_string}
+    arr = ["2001:db8:8:800::/65", "2001:db8:8:800:8000::/65"]
+    assert_equal arr, @network.split(2).map {|s| s.to_string}
+    arr = ["2001:db8:8:800::/64"]
+    assert_equal arr, @network.split(1).map {|s| s.to_string}
+  end
+
   def test_method_literal
     str = "2001-0db8-0000-0000-0008-0800-200c-417a.ipv6-literal.net"
     assert_equal str, @ip.literal
