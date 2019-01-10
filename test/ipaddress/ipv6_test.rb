@@ -445,6 +445,7 @@ class IPv6Test < Minitest::Test
     ip = @klass.new("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff/64")
     assert_instance_of @klass, ip.pred
     assert_equal  "ffff:ffff:ffff:ffff:ffff:ffff:ffff:fffe/64", ip.pred.to_string
+  end
 
   def test_allocate_addresses
     ip = @klass.new("2001:db8::4/125")
