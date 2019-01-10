@@ -97,7 +97,7 @@ class Prefix32Test < Minitest::Test
   def test_method_minus
     p1 = @klass.new 8
     p2 = @klass.new 24
-    assert_equal -16, p1-p2
+    assert_equal (-16), p1-p2
     assert_equal 16, p2-p1
     assert_equal 20, p2-4
     assert_equal 20r, p2-4r
