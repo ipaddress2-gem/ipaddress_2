@@ -1,5 +1,8 @@
 ## [Unreleased]
 
+### Enhancements
+* Added 'find\_adjacent_subnet' to IPv6
+
 ## 0.10.0
 
 ### Enhancements
