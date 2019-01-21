@@ -686,6 +686,16 @@ class IPv4Test < Minitest::Test
     end
   end
 
-end # class IPv4Test
+  def test_finds_adjacent_subnet
+    ip = @klass.new("10.0.0.0/24")
+    assert_equal "10.0.1.0/24", ip.find_adjacent_subnet
+    refute @klass.new("10.0.0.0/0").find_adjacent_subnet 
+    assert_equal "10.0.0.0/8", @klass.new("11.0.0.0/8").find_adjacent_subnet 
+    assert_equal "172.16.0.0/16", @klass.new("172.17.0.0/16").find_adjacent_subnet 
+    assert_equal "192.168.4.0/24", @klass.new("192.168.5.0/24").find_adjacent_subnet 
+    assert_equal "192.168.100.4/30", @klass.new("192.168.100.0/30").find_adjacent_subnet 
+    assert_equal "192.168.1.2/31", @klass.new("192.168.1.0/31").find_adjacent_subnet 
+    assert_equal "192.168.2.5/32", @klass.new("192.168.2.4/32").find_adjacent_subnet 
+  end
 
-  
+end # class IPv4Test

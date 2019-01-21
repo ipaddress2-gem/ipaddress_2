@@ -964,6 +964,22 @@ module IPAddress;
         self.class.parse_u128(next_ip, @prefix)
     end
 
+    #
+    # Finds the adjacent block to a subnet.
+    #
+    # Example:
+    #
+    #    ip = IPAddress("2001:db8::/32")
+    #    ip.find_adjacent_subnet
+    #      #=> "2001:db9::/32"
+    #
+    def find_adjacent_subnet
+      return false if prefix == 0
+      current_subnet = to_string
+      self.prefix = @prefix - 1
+      (split.map{|i| i.to_string} - [current_subnet])[0]
+    end
+
     private
 
     def newprefix(num)

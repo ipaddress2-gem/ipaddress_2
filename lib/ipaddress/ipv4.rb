@@ -1152,6 +1152,22 @@ module IPAddress;
     end
 
     #
+    # Finds the adjacent block to a subnet.
+    #
+    # Example:
+    #
+    #    ip = IPAddress("10.0.0.0/24")
+    #    ip.find_adjacent_subnet
+    #      #=> "10.0.1.0/24"
+    #
+    def find_adjacent_subnet
+      return false if prefix == 0
+      current_subnet = to_string
+      self.prefix = @prefix - 1
+      (split.map{|i| i.to_string} - [current_subnet])[0]
+    end
+
+    #
     # private methods
     #
     private
