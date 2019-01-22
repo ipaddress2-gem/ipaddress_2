@@ -572,11 +572,14 @@ class IPv6Test < Minitest::Test
 
   def test_finds_adjacent_subnet
     refute @klass.new("::/0").find_adjacent_subnet 
+
+    ip = @klass.new("2001:db8::/32")
+    assert_equal "2001:db9::/32", ip.find_adjacent_subnet
+    assert_equal 32, ip.prefix
+
     assert_equal "2001:db9::/32", @klass.new("2001:db8::/32").find_adjacent_subnet 
     assert_equal "2001:db8:0:1::/64", @klass.new("2001:db8::/64").find_adjacent_subnet 
     assert_equal "2001:db8:8:2000::/51", @klass.new("2001:db8:8::/51").find_adjacent_subnet 
-    # assert_equal "", @klass.new("").find_adjacent_subnet 
-    # assert_equal "", @klass.new("").find_adjacent_subnet 
   end
 
 end # class IPv6Test
