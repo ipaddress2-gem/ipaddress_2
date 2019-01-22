@@ -16,11 +16,11 @@ examples of typical usage.
 
 * Ruby 1.9.3 or later
 
-Please refer to {Travis CI}[https://travis-ci.org/ipaddress2-gem/ipaddress2] for Build Tests on specific versions of Ruby.
+Please refer to {Travis CI}[https://travis-ci.org/ipaddress2-gem/ipaddress_2] for Build Tests on specific versions of Ruby.
 
-{<img src="https://travis-ci.org/ipaddress2-gem/ipaddress2.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/ipaddress2-gem/ipaddress2] {<img src="https://codeclimate.com/github/ipaddress2-gem/ipaddress2/badges/gpa.svg" />}[https://codeclimate.com/github/ipaddress2-gem/ipaddress2]
+{<img src="https://travis-ci.org/ipaddress2-gem/ipaddress_2.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/ipaddress2-gem/ipaddress_2] {<img src="https://codeclimate.com/github/ipaddress2-gem/ipaddress_2/badges/gpa.svg" />}[https://codeclimate.com/github/ipaddress2-gem/ipaddress_2]
 
-If you want to contribute, please refer to {Contributing.md}[https://github.com/ipaddress2-gem/ipaddress2/blob/master/CONTRIBUTING.md].
+If you want to contribute, please refer to {Contributing.md}[https://github.com/ipaddress2-gem/ipaddress_2/blob/master/CONTRIBUTING.md].
 
 
 == Installation
