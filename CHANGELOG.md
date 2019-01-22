@@ -1,7 +1,12 @@
 ## [Unreleased]
 
+## 0.11.0
+
 ### Enhancements
 * Added 'find\_adjacent_subnet' to IPv6
+
+### Bugfix
+* Update folders for gem to work
 
 ## 0.10.0
 

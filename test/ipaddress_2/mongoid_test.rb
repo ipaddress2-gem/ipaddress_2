@@ -1,5 +1,5 @@
 require 'test_helper'
-require 'ipaddress/mongoid'
+require 'ipaddress_2/mongoid'
  
 class MongoidTest < Minitest::Test
 

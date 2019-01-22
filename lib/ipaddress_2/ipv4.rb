@@ -1,4 +1,4 @@
-require 'ipaddress/prefix'
+require 'ipaddress_2/prefix'
 
 module IPAddress; 
   # 
