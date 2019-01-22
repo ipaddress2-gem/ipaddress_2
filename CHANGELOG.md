@@ -26,6 +26,6 @@
 ### Bugfix
 * Removed duplicate link_local? in IPv6
 
-Please check [CHANGELOG.rdoc](https://github.com/ipaddress2-gem/ipaddress2/blob/master/CHANGELOG.rdoc) for previous changes.
+Please check [CHANGELOG.rdoc](https://github.com/ipaddress2-gem/ipaddress_2/blob/master/CHANGELOG.rdoc) for previous changes.
 
 

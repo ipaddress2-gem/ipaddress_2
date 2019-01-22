@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
     "README.rdoc"
   ]
   s.files = `git ls-files -z`.split("\x0")
-  s.homepage = "https://github.com/ipaddress2-gem/ipaddress2"
+  s.homepage = "https://github.com/ipaddress2-gem/ipaddress_2"
 
   s.add_development_dependency "bundler"
   s.add_development_dependency "rake"
