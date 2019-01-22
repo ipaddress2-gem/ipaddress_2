@@ -45,7 +45,7 @@ end
 
 desc "Open an irb session preloaded with this library"
 task :console do
-  sh "irb -I lib -r ipaddress.rb"
+  sh "irb -I lib -r ipaddress_2.rb"
 end
 
 desc "Look for TODO and FIXME tags in the code"

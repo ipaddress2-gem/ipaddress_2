@@ -1,12 +1,11 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'ipaddress/version'
+require 'ipaddress_2/version'
 
 Gem::Specification.new do |s|
   s.licenses = ["MIT"]
   s.summary = "IPv4/IPv6 address manipulation library"
   s.name = "ipaddress_2"
-  s.version = "0.9.0"
   s.version = IPAddress::VERSION
   s.require_paths = ["lib"]
   s.authors = ["bluemonk", "mikemackintosh"]

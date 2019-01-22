@@ -12,9 +12,9 @@
 #
 #++
 
-require 'ipaddress/ipv4'
-require 'ipaddress/ipv6'
-require 'ipaddress/mongoid' if defined?(Mongoid)
+require 'ipaddress_2/ipv4'
+require 'ipaddress_2/ipv6'
+require 'ipaddress_2/mongoid' if defined?(Mongoid)
 
 module IPAddress
 
