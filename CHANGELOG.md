@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## 0.11.1
+
+### Bugfix
+* Fix prefix change in find\_adjacent
+
 ## 0.11.0
 
 ### Enhancements
