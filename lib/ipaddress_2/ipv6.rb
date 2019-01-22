@@ -977,7 +977,9 @@ module IPAddress;
       return false if prefix == 0
       current_subnet = to_string
       self.prefix = @prefix - 1
-      (split.map{|i| i.to_string} - [current_subnet])[0]
+      adjacent_subnet = (split.map{|i| i.to_string} - [current_subnet])[0]
+      self.prefix = @prefix + 1
+      return adjacent_subnet
     end
 
     private
