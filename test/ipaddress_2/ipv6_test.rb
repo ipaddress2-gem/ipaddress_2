@@ -128,6 +128,36 @@ class IPv6Test < Minitest::Test
     assert_equal bits, @ip.bits
   end
 
+  def test_method_first
+    ip = @klass.new("2001:db8:8:800::/64")
+    assert_instance_of @klass, ip.first
+    assert_equal "2001:db8:8:800::", ip.first.to_s
+    ip = @klass.new("2001:db8:8::/48")
+    assert_instance_of @klass, ip.first
+    assert_equal "2001:db8:8::", ip.first.to_s
+    ip = @klass.new("2001:db8::/32")
+    assert_instance_of @klass, ip.first
+    assert_equal "2001:db8::", ip.first.to_s
+    ip = @klass.new("2001:db8::8:800:200c:417a/64")
+    assert_instance_of @klass, ip.first
+    assert_equal "2001:db8::", ip.first.to_s
+  end
+
+  def test_method_last
+    ip = @klass.new("2001:db8:8:800::/64")
+    assert_instance_of @klass, ip.last
+    assert_equal  "2001:db8:8:800:ffff:ffff:ffff:ffff", ip.last.to_s
+    ip = @klass.new("2001:db8:8::/48")
+    assert_instance_of @klass, ip.last
+    assert_equal "2001:db8:8:ffff:ffff:ffff:ffff:ffff", ip.last.to_s
+    ip = @klass.new("2001:db8::/32")
+    assert_instance_of @klass, ip.last
+    assert_equal "2001:db8:ffff:ffff:ffff:ffff:ffff:ffff", ip.last.to_s
+    ip = @klass.new("2001:db8::8:800:200c:417a/64")
+    assert_instance_of @klass, ip.last
+    assert_equal  "2001:db8::ffff:ffff:ffff:ffff", ip.last.to_s
+  end
+
   def test_method_prefix=()
     ip = @klass.new "2001:db8::8:800:200c:417a"
     assert_equal 128, ip.prefix
