@@ -247,6 +247,63 @@ module IPAddress;
     end
 
     #
+    # Returns a new IPv6 object with the
+    # first host IP address in the range.
+    # 
+    # Example: given the 2001:db8:8:800::/64 network, the first
+    # host IP address is 2001:db8:8:800::
+    #
+    #   ip = IPAddress("2001:db8:8:800::/64")
+    #
+    #   ip.first.to_s
+    #     #=> "2001:db8:8:800::"
+    #
+    # The object IP doesn't need to be a network: the method
+    # automatically gets the network number from it
+    #
+    #   ip = IPAddress("2001:db8:9:800::2/64")
+    #
+    #   ip.first.to_s
+    #     #=> "2001:db8:9:800::"
+    #
+    def first
+      if prefix == 128
+        return self
+      else
+        IPAddress::IPv6::parse_u128(network_u128)
+      end
+    end
+
+    #
+    # Like its sibling method IPv4#first, this method 
+    # returns a new IPv4 object with the 
+    # last host IP address in the range.
+    # 
+    # Example: given the 192.168.100.0/24 network, the last
+    # host IP address is 192.168.100.254
+    #
+    #   ip = IPAddress("2001:db8:8:800::/64")
+    #
+    #   ip.last.to_s
+    #     #=> "2001:db8:8:800::"
+    #
+    # The object IP doesn't need to be a network: the method
+    # automatically gets the network number from it
+    #
+    #   ip = IPAddress("2001:db8:9:800::2/64")
+    #
+    #   ip.last.to_s
+    #     #=> "2001:db8:9:800:ffff:ffff:ffff:ffff"
+    #
+    def last
+      if prefix == 128
+        return self
+      else
+        IPAddress::IPv6::parse_u128(broadcast_u128)
+      end
+    end
+
+    #
     # Returns the 16-bits value specified by index
     #
     #   ip = IPAddress("2001:db8::8:800:200c:417a/64")
