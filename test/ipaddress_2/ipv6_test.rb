@@ -429,6 +429,21 @@ class IPv6Test < Minitest::Test
     end
   end
 
+  def test_method_broadcast
+    ip = @klass.new("2001:db8:8:800::/64")
+    assert_instance_of @klass, ip.broadcast
+    assert_equal  "2001:db8:8:800:ffff:ffff:ffff:ffff", ip.broadcast.to_s
+    ip = @klass.new("2001:db8:8::/48")
+    assert_instance_of @klass, ip.broadcast
+    assert_equal "2001:db8:8:ffff:ffff:ffff:ffff:ffff", ip.broadcast.to_s
+    ip = @klass.new("2001:db8::/32")
+    assert_instance_of @klass, ip.broadcast
+    assert_equal "2001:db8:ffff:ffff:ffff:ffff:ffff:ffff", ip.broadcast.to_s
+    ip = @klass.new("2001:db8::8:800:200c:417a/64")
+    assert_instance_of @klass, ip.broadcast
+    assert_equal  "2001:db8::ffff:ffff:ffff:ffff", ip.broadcast.to_s
+  end
+
   def test_method_network
     @networks.each do |addr,net|
       ip = @klass.new addr
