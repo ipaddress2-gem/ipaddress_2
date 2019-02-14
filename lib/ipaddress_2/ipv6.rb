@@ -285,7 +285,7 @@ module IPAddress;
     #   ip = IPAddress("2001:db8:8:800::/64")
     #
     #   ip.last.to_s
-    #     #=> "2001:db8:8:800::"
+    #     #=> "2001:db8:8:800:ffff:ffff:ffff:ffff"
     #
     # The object IP doesn't need to be a network: the method
     # automatically gets the network number from it
@@ -826,6 +826,23 @@ module IPAddress;
     #
     def network
       self.class.parse_u128(network_u128, @prefix)
+    end
+
+    #
+    # Returns the broadcast address for the given IP.
+    # As this is IPv6 it is just the last IP
+    #
+    #   ip = IPAddress("2001:db8:8:800::/64")
+    #
+    #   ip.broadcast.to_s
+    #     #=> "2001:db8:8:800::"
+    #
+    def broadcast
+      if prefix == 128
+        return self
+      else
+        IPAddress::IPv6::parse_u128(broadcast_u128)
+      end
     end
 
     #

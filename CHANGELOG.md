@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### Enhancements
+* Added 'last' to IPv6
+* Added 'broadcast' to IPv6
+
 ## 0.11.1
 
 ### Bugfix
