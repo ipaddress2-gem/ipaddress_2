@@ -989,9 +989,10 @@ module IPAddress;
     def self.summarize(*args)
       # one network? no need to summarize
       return [args.first.network] if args.size == 1
+      args_size = args.size 
 
       i = 0
-      result = args.dup.sort.map{|ip| ip.network}
+      result = args.sort.map{|ip| ip.network}
       while i < result.size-1
         sum = result[i] + result[i+1]
         result[i..i+1] = sum.first if sum.size == 1
@@ -999,7 +1000,7 @@ module IPAddress;
       end
 
       result.flatten!
-      if result.size == args.size
+      if result.size == args_size
         # nothing more to summarize
         return result
       else
