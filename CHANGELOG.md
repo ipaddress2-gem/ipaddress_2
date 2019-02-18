@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## 0.12.1
+
+### Bugfix
+* Remove dup from IPv6 summarization to slightly improve performance
+
 ## 0.12.0
 
 ### Enhancements
