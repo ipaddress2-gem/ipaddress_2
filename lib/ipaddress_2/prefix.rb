@@ -45,40 +45,60 @@ module IPAddress
     def to_i
       @prefix
     end
+    alias_method :to_int, :to_i
+
+    #
+    # Provides support for Ruby type coercion
+    #
+    def coerce(other)
+      case other
+      when Integer
+        [other, @prefix]
+      else
+        other.coerce(@prefix).reverse!
+      end
+    end
 
     # 
     # Compare the prefix
     #
     def <=>(oth)
-      @prefix <=> oth.to_i
+      if oth.is_a? Integer
+        @prefix <=> oth
+      else
+        x, y = oth.coerce(@prefix)
+        x <=> y
+      end
     end
 
     #
     # Sums two prefixes or a prefix to a 
-    # number, returns a Fixnum
+    # number, returns a Integer
     #
     def +(oth)
-      if oth.is_a? Fixnum
+      if oth.is_a? Integer
         self.prefix + oth
       else
-        self.prefix + oth.prefix
+        x, y = oth.coerce(@prefix)
+        x + y
       end
     end
 
     #
     # Returns the difference between two
     # prefixes, or a prefix and a number,
-    # as a Fixnum
+    # as a Integer
     #
     def -(oth)
-      if oth.is_a? Fixnum
+      if oth.is_a? Integer
         self.prefix - oth
       else
-        (self.prefix - oth.prefix).abs
+        x, y = oth.coerce(@prefix)
+        x - y
       end
     end
     
-   end # class Prefix
+  end # class Prefix
 
 
   class Prefix32 < Prefix

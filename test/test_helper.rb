@@ -1,11 +1,11 @@
 require 'rubygems'
 require 'minitest/autorun'
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
+require 'simplecov'
+SimpleCov.start
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-require 'ipaddress'
+require 'ipaddress_2'
 
 if Minitest.const_defined?('Test')
   # We're on Minitest 5+. Nothing to do here.
