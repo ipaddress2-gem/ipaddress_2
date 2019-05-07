@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## 0.13.0
+
+### Enhancements
+* Provide arithmetic operations on IPv4 and IPv6
+
 ## 0.12.1
 
 ### Bugfix
