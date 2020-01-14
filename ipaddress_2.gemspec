@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version = IPAddress::VERSION
   s.require_paths = ["lib"]
   s.authors = ["bluemonk", "mikemackintosh"]
-  s.description = "IPAddress2 is a Ruby library designed to make manipulation\n      of IPv4 and IPv6 addresses both powerful and simple. It mantains\n      a layer of compatibility with Ruby's own IPAddr, while\n      addressing many of its issues."
+  s.description = "IPAddress2 is a Ruby library designed to make manipulation\n      of IPv4 and IPv6 addresses both powerful and simple. It maintains\n      a layer of compatibility with Ruby's own IPAddr, while\n      addressing many of its issues."
   s.email = "adam@21eleven.com"
   s.extra_rdoc_files = [
     "CHANGELOG.rdoc",
