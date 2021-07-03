@@ -612,7 +612,13 @@ module IPAddress;
     #   ip6.include? IPAddress("2001:db8:1::8:800:200c:417a/76")
     #     #=> false
     #
+    #   ip6.include? "2001:db8::8:800:200c:1"
+    #     #=> true
+    #
     def include?(oth)
+      unless oth.is_a? IPAddress::IPv6
+        oth = IPv6.new(oth)
+      end
       @prefix <= oth.prefix and network_u128 == self.class.new(oth.address+"/#@prefix").network_u128
     end
 
