@@ -339,6 +339,8 @@ class IPv4Test < Minitest::Test
     addr2 = @klass.new("192.168.10.103/24")    
     assert_equal true, ip.include_all?(addr1,addr2)
     assert_equal false, ip.include_all?(addr1, @klass.new("13.16.0.0/32"))
+    assert_equal true, ip.include_all?("192.168.10.102/24", "192.168.10.103/24")
+    assert_equal false, ip.include_all?(addr1, "13.16.0.0/32")
   end
 
   def test_method_ipv4?
