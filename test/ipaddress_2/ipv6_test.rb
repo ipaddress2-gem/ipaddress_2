@@ -352,6 +352,9 @@ class IPv6Test < Minitest::Test
     not_included = @klass.new "2001:db8:1::8:800:200c:417a/76"
     assert_equal true, @ip.include?(included)
     assert_equal false, @ip.include?(not_included)
+    # string test
+    assert_equal true, @ip.include?("2001:db8::8:800:200c:2")
+    assert_equal false, @ip.include?("2001:db8:1::8:800:200c:417a")
   end
 
   def test_method_include_all?

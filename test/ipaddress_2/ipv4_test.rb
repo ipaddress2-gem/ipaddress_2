@@ -327,7 +327,10 @@ class IPv4Test < Minitest::Test
     assert_equal false, ip.include?(@klass.new("5.5.5.5/32"))
     assert_equal false, ip.include?(@klass.new("11.0.0.0/8"))
     ip = @klass.new("13.13.0.0/13")
-    assert_equal false, ip.include?(@klass.new("13.16.0.0/32"))    
+    assert_equal false, ip.include?(@klass.new("13.16.0.0/32"))
+    ip = @klass.new("10.10.10.0/24")
+    assert_equal true, ip.include?("10.10.10.100")
+    assert_equal false, ip.include?("10.10.9.100")
   end
 
   def test_method_include_all?

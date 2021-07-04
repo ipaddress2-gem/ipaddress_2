@@ -640,7 +640,7 @@ module IPAddress;
     #
     # Checks whether a subnet includes the given IP address.
     #
-    # Accepts an IPAddress::IPv4 object.
+    # Accepts an IPAddress::IPv4 object or a string.
     #
     #   ip = IPAddress("192.168.10.100/24")
     #
@@ -652,7 +652,13 @@ module IPAddress;
     #   ip.include? IPAddress("172.16.0.48/16")
     #     #=> false
     #
+    #   ip.include? "192.168.10.50"
+    #     #=> true
+    #
     def include?(oth)
+      unless oth.is_a? IPAddress::IPv4
+        oth = IPv4.new(oth)
+      end
       @prefix <= oth.prefix and network_u32 == (oth.to_u32 & @prefix.to_u32)
     end
 
