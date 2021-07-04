@@ -664,7 +664,7 @@ module IPAddress;
 
     #
     # Checks whether a subnet includes all the 
-    # given IPv4 objects.
+    # given IPv4 objects or strings.
     #
     #   ip = IPAddress("192.168.10.100/24")
     #
@@ -672,6 +672,9 @@ module IPAddress;
     #   addr2 = IPAddress("192.168.10.103/24")
     #
     #   ip.include_all?(addr1,addr2)
+    #     #=> true
+    #
+    #   ip.include_all?("192.168.10.102/24", "192.168.10.103/24")
     #     #=> true
     #
     def include_all?(*others)

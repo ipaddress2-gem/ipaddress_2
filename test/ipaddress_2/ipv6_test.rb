@@ -363,6 +363,8 @@ class IPv6Test < Minitest::Test
     addr2 = @klass.new("2001:db8:8:800::8/64")
     assert_equal true, ip.include_all?(addr1,addr2)
     assert_equal false, ip.include_all?(addr1, @klass.new("2002:db8:8:800::2/64"))
+    assert_equal true, ip.include_all?("2001:db8:8:800::2/64", "2001:db8:8:800::8/64")
+    assert_equal false, ip.include_all?(addr1, "2002:db8:8:800::2/64")
   end
 
   def test_method_to_hex

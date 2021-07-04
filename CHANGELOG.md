@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## 0.14.0
+
+### Enhancements
+* include? will now accept a string. Will also work for include_all?
+
 ## 0.13.0
 
 ### Enhancements
